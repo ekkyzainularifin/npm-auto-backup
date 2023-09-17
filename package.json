@@ -1,0 +1,29 @@
+{
+  "name": "@ekkyzainularifin/auto-backup",
+  "version": "1.2.1",
+  "description": "backup mysql database automaticly to google drive",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekkyzainularifin/npm-auto-backup.git"
+  },
+  "keywords": [
+    "auto",
+    "backup",
+    "database",
+    "mysql"
+  ],
+  "author": "Ekky Zainul Arifin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ekkyzainularifin/npm-auto-backup/issues"
+  },
+  "homepage": "https://github.com/ekkyzainularifin/npm-auto-backup#readme",
+  "dependencies": {
+    "dotenv": "^16.2.0",
+    "moment": "^2.29.4"
+  }
+}
