@@ -1,11 +1,12 @@
 {
   "name": "@ekkyzainularifin/auto-backup",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "description": "backup mysql database automaticly to google drive",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ekkyzainularifin/npm-auto-backup.git"
@@ -25,5 +26,11 @@
   "dependencies": {
     "dotenv": "^16.2.0",
     "moment": "^2.29.4"
+  },
+  "bin": {
+    "backup": "./src/index.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
