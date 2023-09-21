@@ -24,3 +24,25 @@ To run this project, you will need to add the following environment variables to
 
 `GOOGLE_DRIVE_FOLDER_ID=`
 
+
+
+## Usage/Examples
+
+```javascript
+const autoBackup = require('@ekkyzainularifin/auto-backup');
+
+function backupData() {
+  return autoBackup.backup();
+}
+
+function uploadBackup() {
+   return autoBackup.upload();
+}
+
+async function autoBackupUpload() {
+    await autoBackup.backup();
+    await autoBackup.upload();
+}
+
+autoBackupUpload();
+```
