@@ -1,7 +1,15 @@
 const autoBackup = require('@ekkyzainularifin/auto-backup');
+function backupData() {
+  return autoBackup.backup();
+}
 
-// Run backup function
-autoBackup.backup();
+function uploadBackup() {
+   return autoBackup.upload();
+}
 
-// Run upload to google drive function
-autoBackup.upload();
+async function autoBackupUpload() {
+await autoBackup.backup();
+await autoBackup.upload();
+}
+
+autoBackupUpload();

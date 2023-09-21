@@ -23,16 +23,21 @@ const backupAuto = {
   backup: function backup() {
 
     return new Promise((resolve,reject) => {
-      fs.readdirSync(backupFileName).forEach(f => fs.rmSync(`${backupFileName}/${f}`));
+      fs.readdirSync(backupFileName).forEach(f => fs.unlinkSync(`${backupFileName}/${f}`));
 
       const backupProcess = spawn('mysqldump', [`--host=${dbConfig.host}`, `--user=${dbConfig.user}`,`--password=${dbConfig.password}`, dbConfig.database]);
       const writeStream = fs.createWriteStream(`${backupFileName}/${fileBackupName}`);
       const gzip = zlib.createGzip();
         
       backupProcess.stdout.pipe(gzip).pipe(writeStream);
-      backupProcess.on('exit', () => {
-        console.log('Backup created successfully!');
-        resolve(true);
+      backupProcess.on('exit', (code, signal) => {
+        if (code !== 0) {
+          console.log('Backup created failed!');
+          reject(code);
+        } else {
+          console.log('Backup created successfully!');
+          resolve(true);
+        }
       });
     })
   },
@@ -54,7 +59,7 @@ const backupAuto = {
     };
     const media = {
       mimeType: 'application/gzip',
-      body: fs.createReadStream(`./backup/${fileBackupName}`),
+      body: fs.createReadStream(`${backupFileName}/${fileBackupName}`),
     };
     
     drive.files.create({
