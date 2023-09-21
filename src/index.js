@@ -21,17 +21,20 @@ const dbConfig = {
 };
 const backupAuto = {
   backup: function backup() {
-    
-    fs.readdirSync(backupFileName).forEach(f => fs.rmSync(`${backupFileName}/${f}`));
 
-    const backupProcess = spawn('mysqldump', [`--host=${dbConfig.host}`, `--user=${dbConfig.user}`,`--password=${dbConfig.password}`, dbConfig.database]);
-    const writeStream = fs.createWriteStream(`${backupFileName}/${fileBackupName}`);
-    const gzip = zlib.createGzip();
-      
-    backupProcess.stdout.pipe(gzip).pipe(writeStream);
-    backupProcess.on('exit', () => {
+    return new Promise((resolve,reject) => {
+      fs.readdirSync(backupFileName).forEach(f => fs.rmSync(`${backupFileName}/${f}`));
+
+      const backupProcess = spawn('mysqldump', [`--host=${dbConfig.host}`, `--user=${dbConfig.user}`,`--password=${dbConfig.password}`, dbConfig.database]);
+      const writeStream = fs.createWriteStream(`${backupFileName}/${fileBackupName}`);
+      const gzip = zlib.createGzip();
+        
+      backupProcess.stdout.pipe(gzip).pipe(writeStream);
+      backupProcess.on('exit', () => {
         console.log('Backup created successfully!');
-    });
+        resolve(true);
+      });
+    })
   },
 
   upload: function () {  
