@@ -10,7 +10,8 @@
     "auto",
     "backup",
     "database",
-    "mysql"
+    "mysql",
+    "google drive"
   ],
   "author": "Ekky Zainul Arifin",
   "license": "ISC",
